@@ -9,7 +9,6 @@ function(locationCoordinates, venueName, callback) {
           + "lon=" + locationCoordinates.lon + "&"
           + "text=" + escape(venueName) + "&"
           + "per_page=5&format=json&nojsoncallback=1&media=photos&"
-          + "group_id=1463451@N25&"
           + "api_key=" + process.env.FLICKR_KEY
   }
 
