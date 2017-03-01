@@ -35,10 +35,29 @@ app.get('/photos', function (req, res) {
       locationData.mostPopularVenueName,
       function (photosURLsArray) {
         locationData.photosURLsArray = photosURLsArray;
+        res.end(stringFromLocationData(locationData));
       });
   };
 
+  var stringFromLocationData = function (locationData) {
+    var htmlString = "";
+    htmlString += "<html><body>";
+    htmlString += "<H2>" + locationName + "</H2>";
+    htmlString += "<p>Most popular venue name: " + locationData.mostPopularVenueName + "</p>";
+    htmlString += photosHTMLHrefsFromURLs(locationData.photosURLsArray);
+    htmlString += "</body></html>";
+    return htmlString;
+  }
 
+  var photosHTMLHrefsFromURLs = function (photos) {
+    if (photos.length == 0) {
+      return "<p>No photos found</p>";
+    } else {
+      var photosString = "";
+      for (photo of photos) {
+        photosString += "<img src=\"" + photo + "\" style=\"width:auto;height:200px;\">";
+      }
+      return photosString;
     }
   }
 });
